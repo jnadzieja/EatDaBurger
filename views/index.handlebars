@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="jumbotron text-center mx-auto" style="background: #ffca65;">
+        <img style="max-height: 150px; max-width: 150px;" src="https://melbournechapter.net/images/burger-clipart.png">
+        <h1>Eat-Da-Burger</h1>
+      </div>
+
+      {{#each burgers }}
+        <ol style="font-size: 22px;">
+          <div>
+            {{ this.id }}. {{ this.burger_name }}
+          </div>
+        </ol>
+      {{/each }}
+      <div class="text-center mx-auto">
+        <form action="/add-burger" method="POST" class="text-center mx-auto">
+          <textarea class="form-control w-50 p-3 mx-auto" name="burger_name" type="text" cols="70" rows="4"></textarea>
+          <br>
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+        <br>
+        <p>Enter the kind of burger you want to eat. Hit "submit" when ready.</p>
+      </div>
+    </div>
+  </div>
+</div>
