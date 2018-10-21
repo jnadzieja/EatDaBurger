@@ -12,13 +12,18 @@ app.set("view engine", "handlebars");
 
 // Requirements for mysql to run properly
 const mysql = require("mysql");
-const connection = mysql.createConnection({
-  host: "localhost",
-  port: 3306,
-  user: "root",
-  password: "root",
-  database: "burgers_db"
-});
+let connection;
+if (process.env.JAWSDB_URL) {
+  connection = mysql.createConnection(process.env.JAWSDB_URL);
+} else {
+  connection = mysql.createConnection({
+    host: "localhost",
+    port: 3306,
+    user: "root",
+    password: "root",
+    database: "burgers_db"
+  });
+}
 connection.connect(function(err) {
   if (err) {
     console.log("Error contecting to server: ", err.stack);
@@ -26,6 +31,7 @@ connection.connect(function(err) {
   console.log("Connected with id " + connection.threadId);
 });
 
+// Primary app
 app.get("/", function(req, res) {
   connection.query("SELECT * FROM burgers", function(err, data) {
     if (err) throw err;
